@@ -65,10 +65,11 @@ class Slime(PhisicalEntity):
 
     def update(self):
         # Slime out of the floor, get back on the floor.
-        if self.s[1] >= DISPLAY_HEIGHT - self.r:
+        if self.s[1] > DISPLAY_HEIGHT - self.r:
             self.v[1] = 0.
             self.s[1] = DISPLAY_HEIGHT - self.r
-            self.forces.remove(self.gravity)
+            if self.gravity in self.forces:
+                self.forces.remove(self.gravity)
 
         super().update()
 
